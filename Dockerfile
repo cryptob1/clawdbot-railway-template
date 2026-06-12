@@ -51,6 +51,8 @@ ENV NPM_CONFIG_CACHE=/data/npm-cache
 ENV PNPM_HOME=/data/pnpm
 ENV PNPM_STORE_DIR=/data/pnpm-store
 ENV PATH="/data/npm/bin:/data/pnpm:/usr/local/bin:${PATH}"
+# Codex (ChatGPT-subscription) provider reads its credential from CODEX_HOME; keep it on the volume.
+ENV CODEX_HOME=/data/.codex
 
 # Wrapper listens on Railway's injected $PORT (default 8080 in the wrapper). Do not hardcode PORT.
 EXPOSE 8080
