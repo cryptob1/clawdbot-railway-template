@@ -43,6 +43,15 @@ install_plugin() {
 install_plugin "@openclaw/googlechat" "googlechat"
 install_plugin "@openclaw/codex" "codex"
 
+# Google Drive MCP connector (read/write Drive, Docs, Sheets, Slides) — standalone npm pkg.
+# Credentials (OAuth client + huckbot@ refresh token) live on /data/.huckbot/ and the
+# `mcp.gdrive` entry lives in openclaw.json; both persist on the volume. Re-auth on a fresh
+# volume: see /home/vish/code/huckbot/MAINTENANCE.md.
+if [ ! -x /data/npm/bin/google-drive-mcp ]; then
+  echo "[start] installing @piotr-agier/google-drive-mcp ..."
+  npm install -g @piotr-agier/google-drive-mcp >/dev/null 2>&1 || echo "[start] WARNING: google-drive-mcp install failed"
+fi
+
 if [ -f "${CODEX_HOME}/auth.json" ]; then
   echo "[start] codex credential present (${CODEX_HOME})"
 else
